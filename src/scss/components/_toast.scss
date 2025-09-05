@@ -1,0 +1,54 @@
+@use "../utils" as *;
+
+.toast {
+  background-color: var(--grey-900);
+  padding: var(--space-300);
+  border-radius: var(--space-150);
+  width: 100%;
+  max-width: 28.125rem;
+  position: absolute;
+  color: var(--white);
+  display: grid;
+  grid-template-columns: var(--space-250) 1fr;
+  gap: var(--space-100);
+  align-items: center;
+  top: var(--space-300);
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-1 * (var(--space-1600) + 10px)));
+  animation: slide-in 0.2s ease forwards, slide-out 0.25s ease forwards 4s;
+
+  @include mq(s) {
+    width: calc(100% - (2 * var(--space-300)));
+  }
+
+  h2 {
+    @include preset("body-m-bold");
+  }
+
+  p {
+    @include preset("body-s-regular");
+    grid-column: 1 / -1;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(-50%)
+      translateY(calc(-1 * (var(--space-1600) + 10px)));
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slide-out {
+  from {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(-50%)
+      translateY(calc(-1 * (var(--space-1600) + 10px)));
+    opacity: 0;
+  }
+}

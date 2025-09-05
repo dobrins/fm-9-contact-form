@@ -1,0 +1,9 @@
+@use "../utils" as *;
+
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+body {
+  font-family: "Karla", sans-serif;
+  background-color: var(--green-200);
+  color: var(--grey-900);
+}

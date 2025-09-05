@@ -1,0 +1,49 @@
+@use "variables" as *;
+@use "sass:map";
+
+/* Media Queries */
+
+@mixin mq($breakpoint) {
+  @if $breakpoint == s {
+    @media (max-width: 38em) {
+      @content;
+    }
+  } @else if $breakpoint == m {
+    @media (max-width: 50em) {
+      @content;
+    }
+  }
+}
+
+/* Typography */
+
+$preset-styles: (
+  "heading": (
+    font-size: var(--space-400),
+    font-weight: var(--font-bold),
+    letter-spacing: calc(-1 * var(--space-12)),
+  ),
+  "body-m-bold": (
+    font-size: var(--space-225),
+    line-height: 1.5,
+    font-weight: var(--font-bold),
+  ),
+  "body-m-regular": (
+    font-size: var(--space-225),
+    line-height: 1.5,
+    font-weight: var(--font-regular),
+  ),
+  "body-s-regular": (
+    font-size: var(--space-200),
+    line-height: 1.5,
+    font-weight: var(--font-regular),
+  ),
+);
+
+@mixin preset($n) {
+  $preset: map.get($preset-styles, $n);
+
+  @each $prop, $value in $preset {
+    #{$prop}: $value;
+  }
+}

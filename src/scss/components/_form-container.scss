@@ -1,0 +1,22 @@
+@use "../utils" as *;
+
+.form-container {
+  max-width: 46rem;
+  width: 100%;
+  margin-inline: auto;
+  margin-block: var(--space-1600) var(--space-400);
+  background-color: var(--white);
+  border-radius: var(--space-200);
+  padding: var(--space-500);
+  display: grid;
+  gap: var(--space-400);
+
+  @include mq(s) {
+    margin-block: var(--space-400);
+    padding: var(--space-300);
+  }
+
+  &__heading {
+    @include preset("heading");
+  }
+}

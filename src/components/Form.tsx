@@ -1,6 +1,8 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import { SignupSchema } from "../constants/schema";
 import Toast from "./Toast";
+import ErrorMsg from "./ErrorMsg";
+import Label from "./Label";
 
 export const SignupForm = () => (
   <div className="form-container">
@@ -22,6 +24,7 @@ export const SignupForm = () => (
           console.log(values);
           resetForm();
           setStatus("success");
+          window.scrollTo({ top: 0, behavior: "smooth" });
         } finally {
           setSubmitting(false);
           await new Promise((r) => setTimeout(r, 5000));
@@ -32,21 +35,20 @@ export const SignupForm = () => (
         <Form
           className="form"
           noValidate>
-          {/* Global status (polite) */}
           <div
             aria-live="polite"
             className="sr-only"></div>
           {status === "success" && <Toast />}
-
-          {/* First name */}
           <div
             className={`form-control ${
               errors.firstName && touched.firstName ? "form-control--error" : ""
             }`}>
-            <label htmlFor="firstName">
-              First Name <span className="required">*</span>
-            </label>
+            <Label
+              text="First Name"
+              id="firstName"
+            />
             <Field
+              type="text"
               id="firstName"
               name="firstName"
               className="input"
@@ -59,26 +61,18 @@ export const SignupForm = () => (
                   : undefined
               }
             />
-            <ErrorMessage name="firstName">
-              {(msg) => (
-                <div
-                  id="firstName-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="firstName" />
           </div>
-          {/* Last name */}
           <div
             className={`form-control ${
               errors.lastName && touched.lastName ? "form-control--error" : ""
             }`}>
-            <label htmlFor="lastName">
-              Last Name <span className="required">*</span>
-            </label>
+            <Label
+              text="Last Name"
+              id="lastName"
+            />
             <Field
+              type="text"
               id="lastName"
               name="lastName"
               className="input"
@@ -91,25 +85,16 @@ export const SignupForm = () => (
                   : undefined
               }
             />
-            <ErrorMessage name="lastName">
-              {(msg) => (
-                <div
-                  id="lastName-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="lastName" />
           </div>
-          {/* Email */}
           <div
             className={`form-control form-control--full-width ${
               errors.email && touched.email ? "form-control--error" : ""
             }`}>
-            <label htmlFor="email">
-              Email <span className="required">*</span>
-            </label>
+            <Label
+              text="Email Address"
+              id="email"
+            />
             <Field
               id="email"
               name="email"
@@ -123,27 +108,16 @@ export const SignupForm = () => (
                 errors.email && touched.email ? "email-error" : undefined
               }
             />
-            <ErrorMessage name="email">
-              {(msg) => (
-                <div
-                  id="email-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="email" />
           </div>
-          {/* Radio group */}
           <div
-            className="form-control form-control--full-width"
+            className="form-control form-control--full-width form-control--double-gap"
             aria-invalid={Boolean(errors.queryType && touched.queryType)}>
             <div
               id="queryTypeLegend"
               className="label">
               Query Type <span className="required">*</span>
             </div>
-
             <div
               className="query-type"
               role="radiogroup"
@@ -165,26 +139,16 @@ export const SignupForm = () => (
                 Support Request
               </label>
             </div>
-
-            <ErrorMessage name="queryType">
-              {(msg) => (
-                <div
-                  id="queryType-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="queryType" />
           </div>
-          {/* Message */}
           <div
             className={`form-control form-control--full-width ${
               errors.message && touched.message ? "form-control--error" : ""
             }`}>
-            <label htmlFor="message">
-              Message <span className="required">*</span>
-            </label>
+            <Label
+              text="Message"
+              id="message"
+            />
             <Field
               id="message"
               name="message"
@@ -197,23 +161,13 @@ export const SignupForm = () => (
                 errors.message && touched.message ? "message-error" : undefined
               }
             />
-            <ErrorMessage name="message">
-              {(msg) => (
-                <div
-                  id="message-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="message" />
           </div>
-          {/* Consent */}
           <div
             className={`form-control form-control--full-width ${
               errors.consent && touched.consent ? "form-control--error" : ""
             }`}>
-            <div className="flex">
+            <div className="flex mb-200">
               <Field
                 id="consent"
                 name="consent"
@@ -227,21 +181,12 @@ export const SignupForm = () => (
                     : undefined
                 }
               />
-              <label htmlFor="consent">
-                I consent to being contacted by the team{" "}
-                <span className="required">*</span>
-              </label>
+              <Label
+                text="I consent to being contacted by the team"
+                id="consent"
+              />
             </div>
-            <ErrorMessage name="consent">
-              {(msg) => (
-                <div
-                  id="consent-error"
-                  className="error"
-                  role="alert">
-                  {msg}
-                </div>
-              )}
-            </ErrorMessage>
+            <ErrorMsg name="consent" />
           </div>
           <button
             type="submit"

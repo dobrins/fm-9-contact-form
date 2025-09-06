@@ -1,0 +1,78 @@
+@use "../utils" as *;
+
+input[type="radio"] {
+  appearance: none;
+  border-radius: 50%;
+  width: var(--space-250);
+  height: var(--space-250);
+  border: var(--space-25) solid var(--grey-500);
+  position: relative;
+  flex-shrink: 0;
+
+  &::after {
+    transition: 0.1s transform linear;
+    content: "";
+    width: var(--space-125);
+    height: var(--space-125);
+    border-radius: 50%;
+    background-color: var(--green-600);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+  }
+
+  &:checked {
+    border-color: var(--green-600);
+
+    &::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  &:focus {
+    outline: 0;
+  }
+}
+
+input[type="checkbox"] {
+  appearance: none;
+  border-radius: var(--space-25);
+  width: var(--space-225);
+  height: var(--space-225);
+  border: var(--space-12) solid var(--grey-500);
+  position: relative;
+  font-family: system-ui, sans-serif;
+  transition: 0.2s all ease-in-out 0.1s;
+  flex-shrink: 0;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 72%;
+    height: 72%;
+    position: absolute;
+    left: 14%;
+    top: 14%;
+    transition: 0.2s transform ease-in-out 0.1s;
+    background-color: var(--white);
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+    transform: scale(0) rotate(180deg);
+  }
+
+  &:checked {
+    border-color: var(--green-600);
+    background-color: var(--green-600);
+    transition: 0.3s all ease-in-out;
+
+    &::after {
+      transform: scale(1) rotate(0);
+      transition-delay: 0;
+    }
+  }
+
+  &:focus {
+    outline: 0;
+    border-color: var(--green-600);
+  }
+}
